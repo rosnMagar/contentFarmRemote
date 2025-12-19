@@ -92,8 +92,8 @@ class VideoProcessor:
             
         cap.release()
         
-        # Select the most significant frames
-        selected_candidates = sorted(frame_candidates, key=lambda x: x[2], reverse=True)[:target_frames]
+        # Select frames in chronological order
+        selected_candidates = frame_candidates[:target_frames]
         
         # If max_frames is specified, sample evenly across the candidates
         if max_frames is not None and max_frames < len(selected_candidates):

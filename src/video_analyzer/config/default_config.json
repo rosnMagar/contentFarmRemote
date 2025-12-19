@@ -4,7 +4,7 @@
         "temperature": 0.0,
         "ollama": {
             "url": "http://localhost:11434",
-            "model": "llama3.2-vision"
+            "model": "rockn/Qwen2.5-Omni-7B-Q4_K_M:latest"
         },
         "openai_api": {
             "api_key": "",
@@ -25,12 +25,12 @@
     ],
     "output_dir": "../output",
     "frames": {
-        "per_minute": 240,
+        "per_minute": 600,
         "analysis_threshold": 10.0,
         "min_difference": 5.0,
-        "max_count": 30,
+        "max_count": 18000,
         "start_stage": 1,
-        "max_frames": 2147483647
+        "max_frames": 18000
     },
     "response_length": {
         "frame": 300,

@@ -18,13 +18,18 @@ def main():
 
     # Initialize components
     # TODO: make this configurable
-    video_path = Path("../videos/test2.mp4") # test video
+    video_path = Path("../videos/test3.mp4") # test video
     output_dir = Path(config.get("output_dir"))
     client = create_client(config)
     model = get_model(config)
     prompt_loader = PromptLoader(config.get("prompt_dir"), config.get("prompts", []))
+    user_prompt = "This is a video probably about people cheating."
     start_stage = 1
-    max_frames = 2147483647
+    max_frames = config.get("frames", {}).get("max_frames", 18000)
+
+    # frame analysis with sliding window
+    window_size = 4
+    stride = 4
 
     try:
         transcript = None
@@ -66,7 +71,6 @@ def main():
             )
             frames = processor.extract_keyframes(
                 frames_per_minute=config.get("frames", {}).get("per_minute", 60),
-                duration=config.get("duration"),
                 max_frames=max_frames
             )
             
@@ -78,11 +82,13 @@ def main():
                 model, 
                 prompt_loader,
                 config.get("clients", {}).get("temperature", 0.2),
-                config.get("prompt", "")
+                user_prompt
             )
             frame_analyses = []
-            for frame in frames:
-                analysis = analyzer.analyze_frame(frame)
+
+            # sliding window analysis
+            for i in range(0, len(frames) - window_size + 1, stride):
+                analysis = analyzer.analyze_frame(frames[i:i+window_size], transcript)
                 frame_analyses.append(analysis)
                 
         # Stage 3: Video Reconstruction

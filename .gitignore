@@ -1,4 +1,8 @@
 *.mp4
+*.jpg
+*.jpeg
+*.png
+*.webm
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

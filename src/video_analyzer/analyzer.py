@@ -52,23 +52,41 @@ class VideoAnalyzer:
             
         return "\n".join(formatted_analyses)
 
-    def analyze_frame(self, frame: Frame) -> Dict[str, Any]:
-        """Analyze a single frame using the LLM."""
+    def _get_transcript_for_timerange(self, transcript: Optional[AudioTranscript],
+                                       start_time: float, end_time: float) -> str:
+        """Extract transcript text that falls within the given time range."""
+        if not transcript or not transcript.segments:
+            return ""
+        relevant_segments = [
+            seg["text"] for seg in transcript.segments
+            if seg["end"] >= start_time and seg["start"] <= end_time
+        ]
+        return " ".join(relevant_segments).strip()
+
+    def analyze_frame(self, frames: List[Frame], 
+                      transcript: Optional[AudioTranscript] = None) -> Dict[str, Any]:
+        """Analyze frames using the LLM, optionally with transcript context."""
         # Replace {PREVIOUS_FRAMES} token with formatted previous analyses
         # Replace tokens in the prompt template
         prompt = self.frame_prompt.replace("{PREVIOUS_FRAMES}", self._format_previous_analyses())
         prompt = prompt.replace("{prompt}", self._format_user_prompt())
-        prompt = f"{prompt}\nThis is frame {frame.number} captured at {frame.timestamp:.2f} seconds."
+        
+        # Inject transcript segment for this time range
+        transcript_text = self._get_transcript_for_timerange(
+            transcript, frames[0].timestamp, frames[-1].timestamp
+        )
+        prompt = prompt.replace("{TRANSCRIPT_SEGMENT}", transcript_text)
+        prompt = f"{prompt}\nThis is frame {frames[0].number} to {frames[-1].number} captured at {frames[0].timestamp:.2f} to {frames[-1].timestamp:.2f} seconds."
         
         try:
             response = self.client.generate(
                 prompt=prompt,
-                image_path=str(frame.path),
+                image_paths=[str(frame.path) for frame in frames],
                 model=self.model,
                 temperature=self.temperature,
                 num_predict=300
             )
-            logger.debug(f"Successfully analyzed frame {frame.number}")
+            logger.debug(f"Successfully analyzed frame {frames[0].number} to {frames[-1].number}")
             
             # Store the analysis for future frames
             analysis_result = {k: v for k, v in response.items() if k != "context"}
