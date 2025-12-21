@@ -1,0 +1,13 @@
+Analyze this video segment with full audio-visual integration.
+
+USER CONTENT CRITERIA:
+{USER_CRITERIA}
+
+YOUR ANALYSIS TASK:
+1. AUDIO ELEMENTS: Describe all audio you hear - speech/dialogue (quote key lines), tone of voice, background sounds, music
+2. VISUAL ELEMENTS: Describe what you see - people, actions, expressions, settings, movements
+3. NARRATIVE INTEGRATION: Explain how audio and video work together to tell the story
+4. RELEVANCE: Assess how this content relates to the user's criteria above
+
+Provide a detailed analysis that treats audio and video as a unified narrative experience.
+Focus on the relationships, emotions, and story being conveyed through both modalities.

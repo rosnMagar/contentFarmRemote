@@ -1,0 +1,35 @@
+Analyze this video segment (Scene {CHUNK_INDEX}, seconds {CHUNK_START} to {CHUNK_END} of the full video).
+
+USER CONTENT CRITERIA:
+{USER_CRITERIA}
+
+CONTEXT FROM PREVIOUS SCENE:
+{PREVIOUS_CONTEXT}
+
+=== IMPORTANT: WRITE A DETAILED ANALYSIS FIRST ===
+
+You MUST provide a detailed written analysis BEFORE the JSON. Do NOT skip to JSON immediately.
+
+Write at least 3-4 sentences describing:
+1. WHAT you see: Describe the specific animals, people, objects, and setting
+2. WHAT they are doing: Describe specific actions, movements, and behaviors  
+3. HOW they appear: Describe expressions, body language, emotions shown
+4. WHAT you hear: Describe any sounds, speech, music, or audio cues
+5. Focus on what makes THIS scene UNIQUE compared to other scenes
+
+Be SPECIFIC. Instead of "dog is scared", say "A golden retriever cowers behind a couch, ears flattened, while a small orange tabby cat approaches it confidently."
+
+=== THEN PROVIDE TIMESTAMPS ===
+
+After your detailed analysis, provide timestamps in this exact JSON format:
+```json
+{
+  "timestamps": [
+    {"start": 0.0, "end": 5.0, "reason": "SPECIFIC description of what happens", "continues_from_previous": false}
+  ]
+}
+```
+
+The "reason" field should describe the SPECIFIC action, not just repeat the criteria.
+
+If no content matches the criteria in this segment, use: {"timestamps": []}

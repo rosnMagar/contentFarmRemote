@@ -10,6 +10,21 @@
             "api_key": "",
             "model": "meta-llama/llama-3.2-11b-vision-instruct",
             "api_url": "https://openrouter.ai/api/v1"
+        },
+        "qwen_omni": {
+            "model": "Qwen/Qwen2.5-Omni-3B",
+            "use_audio_in_video": true,
+            "device_map": "auto",
+            "use_flash_attention": false,
+            "video_max_pixels": 401408,
+            "fps": 3.0,
+            "max_frames": 30
+        },
+        "scene_detection": {
+            "threshold": 30.0,
+            "min_scene_duration": 5.0,
+            "max_scene_duration": 30.0,
+            "sample_interval_seconds": 0.5
         }
     },
     "prompt_dir": "prompts",
@@ -21,6 +36,26 @@
         {
             "name": "Video Reconstruction",
             "path": "frame_analysis/describe.txt"
+        },
+        {
+            "name": "Qwen System Prompt",
+            "path": "qwen_omni/system_prompt.txt"
+        },
+        {
+            "name": "Qwen Analysis",
+            "path": "qwen_omni/analysis.txt"
+        },
+        {
+            "name": "Qwen Chunk Analysis",
+            "path": "qwen_omni/chunk_analysis.txt"
+        },
+        {
+            "name": "Qwen Verdict",
+            "path": "qwen_omni/verdict.txt"
+        },
+        {
+            "name": "Qwen Timestamp Extraction",
+            "path": "qwen_omni/timestamp_extraction.txt"
         }
     ],
     "output_dir": "../output",

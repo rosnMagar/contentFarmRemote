@@ -1,0 +1,21 @@
+You analyzed a video. Now identify the time segments where content matching the user's criteria appears.
+
+USER'S CONTENT CRITERIA:
+{USER_CRITERIA}
+
+VIDEO DURATION: {VIDEO_DURATION} seconds
+
+CHUNK ANALYSES:
+{CHUNK_ANALYSES}
+
+Based on your analysis, identify ALL time segments that contain relevant content.
+
+Respond with ONLY valid JSON in this exact format (no markdown, no explanation):
+{"chunks_of_interest": [{"start": 0.0, "end": 8.3, "reason": "Your specific reason why this segment matches the criteria"}], "segments_to_trim": [], "summary": "Brief summary of what was found"}
+
+Rules:
+- Use actual timestamps from the video (duration is {VIDEO_DURATION} seconds)
+- Write specific reasons based on what you actually saw and heard
+- If the entire video is relevant, use one chunk from 0 to the full duration
+- If nothing is relevant, use empty arrays and explain in summary
+- Do NOT use placeholder text - write real descriptions

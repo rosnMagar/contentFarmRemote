@@ -1,0 +1,19 @@
+Based on your analysis of this video, provide a final verdict on whether it matches the user's content criteria.
+
+USER'S CONTENT CRITERIA:
+{USER_CRITERIA}
+
+YOUR VIDEO ANALYSIS:
+{ANALYSIS}
+
+Now provide your verdict. You MUST:
+1. State whether the video matches the criteria (YES, NO, or PARTIAL)
+2. Rate your confidence (HIGH, MEDIUM, or LOW)
+3. Explain WHY with specific evidence from the video
+4. Provide detailed descripton of what happens in the scene
+5. What is happening in this specific moment?
+
+Your response format:
+VERDICT: YES or NO or PARTIAL
+CONFIDENCE: HIGH or MEDIUM or LOW
+JUSTIFICATION: Write 2-3 specific sentences here citing actual audio and visual evidence from the video you analyzed. Reference specific dialogue, actions, or scenes.
